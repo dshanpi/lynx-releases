@@ -51,10 +51,10 @@ LYNX 将多块开发板、固件烧录、串口和 ADB 终端、远端 SDK、SSH
 | Allwinner 全志 | OpenixCLI / libefex | FEL/FES 扫描与固件烧录 |
 | Rockchip 瑞芯微 | OpenRockCLI | Maskrom/Loader 扫描、Rockusb 命令；Linux 支持 `update.img` 流程 |
 | NXP i.MX | UUU | SDP/Fastboot 扫描、UUU 脚本和固件执行、USB 路径绑定 |
-| 嘉楠 K230 | 规划中 | 已预留厂家模型，暂未启用 |
+| 嘉楠 K230/K230D | LYNX 内置协议 | BootROM/Loader 扫描；EMMC、SD、SPI NAND、SPI NOR 与 OTP 烧录 |
 | ST STM32MP1 | 规划中 | DFU 适配规划中，暂未启用 |
 
-烧录 CLI 和所需动态库随安装包一起发布。Windows 安装包已经自动解包验证 `libusb-1.0.dll`、OpenixCLI、OpenRockCLI 和 UUU，正常情况下不需要手工复制 DLL。
+烧录 CLI 和所需动态库随安装包一起发布。K230 协议及对应 Loader 已直接内置，无需填写外部 CLI 路径或烧录参数。Windows 安装包会自动解包验证 `libusb-1.0.dll`、OpenixCLI、OpenRockCLI 和 UUU，正常情况下不需要手工复制 DLL。
 
 ### 远端 SDK 与 AI 通道
 
@@ -76,13 +76,13 @@ LYNX 将多块开发板、固件烧录、串口和 ADB 终端、远端 SDK、SSH
 若更适合集中部署，可以使用 MSI：
 
 ```powershell
-msiexec /i LYNX_0.1.0_x64_en-US.msi
+msiexec /i LYNX_0.1.1_x64_en-US.msi
 ```
 
 ### Ubuntu / Debian
 
 ```bash
-sudo apt install ./LYNX_0.1.0_amd64.deb
+sudo apt install ./LYNX_0.1.1_amd64.deb
 ```
 
 如果无法访问 USB 或串口，请检查 udev 规则以及当前用户的 `dialout`、`plugdev` 等设备访问权限。
@@ -90,14 +90,14 @@ sudo apt install ./LYNX_0.1.0_amd64.deb
 ### Fedora / RHEL
 
 ```bash
-sudo dnf install ./LYNX-0.1.0-1.x86_64.rpm
+sudo dnf install ./LYNX-0.1.1-1.x86_64.rpm
 ```
 
 ### AppImage
 
 ```bash
-chmod +x LYNX_0.1.0_amd64.AppImage
-./LYNX_0.1.0_amd64.AppImage
+chmod +x LYNX_0.1.1_amd64.AppImage
+./LYNX_0.1.1_amd64.AppImage
 ```
 
 ### macOS ARM64
@@ -127,9 +127,11 @@ chmod +x LYNX_0.1.0_amd64.AppImage
 2. 确认开发板已经进入对应烧录模式：
    - Rockchip：Maskrom 或 Loader；
    - NXP i.MX：SDP、SDPU、SDPV 或 Fastboot；
+   - 嘉楠 K230：BootROM 或已下载 Loader 的阶段；
    - Allwinner：FEL/FES。
-3. 在工作台选择固件或烧录任务。
-4. 启动烧录并观察进度、CLI 输出及任务历史。
+3. K230 单板还需在设置中选择 EMMC、SD Card、SPI NAND、SPI NOR 或 OTP 目标介质。
+4. 在工作台选择固件或烧录任务。
+5. 启动烧录并观察进度、输出及任务历史。
 
 烧录过程中不要拔掉 USB、电源或关闭应用。烧录失败时先保存完整日志，再检查驱动、线材、供电和芯片启动模式。
 
@@ -164,7 +166,7 @@ sha256sum -c SHA256SUMS.txt
 Windows PowerShell：
 
 ```powershell
-Get-FileHash .\LYNX_0.1.0_x64-setup.exe -Algorithm SHA256
+Get-FileHash .\LYNX_0.1.1_x64-setup.exe -Algorithm SHA256
 ```
 
 将输出与 `SHA256SUMS.txt` 中对应文件的摘要进行比较。
@@ -187,6 +189,13 @@ Get-FileHash .\LYNX_0.1.0_x64-setup.exe -Algorithm SHA256
 - 检查芯片是否进入 SDP/Fastboot 模式。
 - 确认 USB VID/PID 与 UUU 支持列表匹配。
 - 关闭正在占用该 USB 设备的其他 UUU 进程。
+
+### 嘉楠 K230 扫描不到设备
+
+- 确认芯片已进入 USB BootROM 或 Loader 模式，USB VID/PID 应为 `29f1:0230`。
+- Windows 需要为设备安装可由 libusb 访问的驱动；Linux 需要相应 udev 权限。
+- 关闭其他 K230 烧录工具，避免它们占用 USB interface 0。
+- 烧录前务必核对目标介质，尤其是 OTP；OTP 写入具有不可逆风险。
 
 ### 为什么系统要求解锁密钥环
 
