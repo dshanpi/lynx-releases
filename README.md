@@ -76,13 +76,13 @@ LYNX 将多块开发板、固件烧录、串口和 ADB 终端、远端 SDK、SSH
 若更适合集中部署，可以使用 MSI：
 
 ```powershell
-msiexec /i LYNX_0.1.1_x64_en-US.msi
+msiexec /i LYNX_0.1.2_x64_en-US.msi
 ```
 
 ### Ubuntu / Debian
 
 ```bash
-sudo apt install ./LYNX_0.1.1_amd64.deb
+sudo apt install ./LYNX_0.1.2_amd64.deb
 ```
 
 如果无法访问 USB 或串口，请检查 udev 规则以及当前用户的 `dialout`、`plugdev` 等设备访问权限。
@@ -90,14 +90,14 @@ sudo apt install ./LYNX_0.1.1_amd64.deb
 ### Fedora / RHEL
 
 ```bash
-sudo dnf install ./LYNX-0.1.1-1.x86_64.rpm
+sudo dnf install ./LYNX-0.1.2-1.x86_64.rpm
 ```
 
 ### AppImage
 
 ```bash
-chmod +x LYNX_0.1.1_amd64.AppImage
-./LYNX_0.1.1_amd64.AppImage
+chmod +x LYNX_0.1.2_amd64.AppImage
+./LYNX_0.1.2_amd64.AppImage
 ```
 
 ### macOS ARM64
@@ -166,7 +166,7 @@ sha256sum -c SHA256SUMS.txt
 Windows PowerShell：
 
 ```powershell
-Get-FileHash .\LYNX_0.1.1_x64-setup.exe -Algorithm SHA256
+Get-FileHash .\LYNX_0.1.2_x64-setup.exe -Algorithm SHA256
 ```
 
 将输出与 `SHA256SUMS.txt` 中对应文件的摘要进行比较。
