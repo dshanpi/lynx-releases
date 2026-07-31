@@ -9,7 +9,7 @@
   </p>
 </div>
 
-本仓库是 **DshanPI LYNX｜芯桥的官方安装包与自动更新仓库**，仅保存经过 GitHub Actions 构建的 Windows、Linux、macOS 安装包、Tauri 更新签名和 SHA-256 校验文件。
+本仓库是 **DshanPI LYNX｜芯桥的官方安装包与自动更新仓库**，保存经过项目发布流程构建的 Windows、Linux、macOS 安装包、Tauri 更新签名和 SHA-256 校验文件。
 
 软件源代码、问题反馈和开发文档位于 [`dshanpi/lynx`](https://github.com/dshanpi/lynx)。
 
@@ -19,6 +19,8 @@
 ## 下载
 
 前往 [最新版本下载页](https://github.com/dshanpi/lynx-releases/releases/latest)。
+
+> Linux 用户也可以试用 [v0.1.3 Linux 本地预览版](https://github.com/dshanpi/lynx-releases/releases/tag/v0.1.3)。它在 Ubuntu 主机本地构建并上传，加入多研发并行使用时的 MCP 远端端口自动避让，仅包含 Linux x86_64 安装包。该预览版没有自动更新签名，不会替换跨平台的 Latest 版本。
 
 ### 应该下载哪个文件
 
