@@ -20,7 +20,7 @@
 
 前往 [最新版本下载页](https://github.com/dshanpi/lynx-releases/releases/latest)。
 
-> Linux 用户也可以试用 [v0.1.3 Linux 本地预览版](https://github.com/dshanpi/lynx-releases/releases/tag/v0.1.3)。它在 Ubuntu 主机本地构建并上传，加入多研发并行使用时的 MCP 远端端口自动避让，仅包含 Linux x86_64 安装包。该预览版没有自动更新签名，不会替换跨平台的 Latest 版本。
+> Windows 和 Linux 用户也可以试用 [v0.1.3 本地预览版](https://github.com/dshanpi/lynx-releases/releases/tag/v0.1.3)。它在 Ubuntu 主机本地构建并上传，加入多研发并行使用时的 MCP 远端端口自动避让，包含 Windows x64 NSIS 以及 Linux x86_64 安装包。该预览版没有自动更新签名，不会替换跨平台的 Latest 版本。
 
 ### 应该下载哪个文件
 
