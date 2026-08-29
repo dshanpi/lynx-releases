@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: dshanpi/lynx
-          ref: 8bd8da39074126866454485caa812ceb535ee10b
+          ref: 753c08e0976283970c83b12d3abea3a13dfe2859
           submodules: recursive
           ssh-key: ${{ secrets.LYNX_SOURCE_DEPLOY_KEY }}
 
@@ -173,7 +173,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: dshanpi/lynx
-          ref: 8bd8da39074126866454485caa812ceb535ee10b
+          ref: 753c08e0976283970c83b12d3abea3a13dfe2859
           submodules: recursive
           ssh-key: ${{ secrets.LYNX_SOURCE_DEPLOY_KEY }}
 
