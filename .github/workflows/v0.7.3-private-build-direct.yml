@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: dshanpi/lynx
-          ref: 5b053eb32e84f6bdfa6ff7abae87322d16357169
+          ref: fb29b09791e9979dc68d58361d5c4aa4d94af7bf
           submodules: recursive
           ssh-key: ${{ secrets.LYNX_SOURCE_DEPLOY_KEY }}
 
@@ -98,7 +98,7 @@ jobs:
         run: cargo check --manifest-path src-tauri/Cargo.toml
 
       - name: Simulate visible business logic in isolated Tauri desktop
-        run: npm run gate:business-logic-ui
+        run: VITE_LYNX_AI_RUNTIME_GATE=1 npm run gate:business-logic-ui
 
       - name: Upload business logic screenshots
         if: always()
@@ -174,7 +174,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: dshanpi/lynx
-          ref: 5b053eb32e84f6bdfa6ff7abae87322d16357169
+          ref: fb29b09791e9979dc68d58361d5c4aa4d94af7bf
           submodules: recursive
           ssh-key: ${{ secrets.LYNX_SOURCE_DEPLOY_KEY }}
 
