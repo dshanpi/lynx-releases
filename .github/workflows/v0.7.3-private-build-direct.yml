@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: dshanpi/lynx
-          ref: 753c08e0976283970c83b12d3abea3a13dfe2859
+          ref: 7896c86ac30e8a9d9eed4af48f37ee9122dcbd2f
           submodules: recursive
           ssh-key: ${{ secrets.LYNX_SOURCE_DEPLOY_KEY }}
 
@@ -46,6 +46,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri -> target
+          cache-on-failure: true
 
       - name: Install native dependencies
         run: |
@@ -173,7 +174,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: dshanpi/lynx
-          ref: 753c08e0976283970c83b12d3abea3a13dfe2859
+          ref: 7896c86ac30e8a9d9eed4af48f37ee9122dcbd2f
           submodules: recursive
           ssh-key: ${{ secrets.LYNX_SOURCE_DEPLOY_KEY }}
 
@@ -187,6 +188,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri -> target
+          cache-on-failure: true
 
       - name: Install Windows OpenRockCLI toolchain
         if: runner.os == 'Windows'
