@@ -1,18 +1,20 @@
 <div align="center">
   <img width="112" src="https://raw.githubusercontent.com/dshanpi/lynx/main/assets/branding/lynx-icon-master.png" alt="DshanPI LYNX logo">
   <h1>DshanPI LYNX｜芯桥</h1>
-  <p><strong>内测版 · 面向多芯片开发板的烧录、终端、远端 SDK 与 AI 调试工作台</strong></p>
+  <p><strong>v0.1.0 正式版准备中 · 面向多芯片开发板的烧录、终端、远端 SDK 与 AI 调试工作台</strong></p>
   <p><strong>面向嵌入式开发板的 AI 工作台、跨芯片烧录器与远端 SDK 通道管理工具</strong></p>
   <p>
     <a href="https://github.com/dshanpi/lynx/actions/workflows/build.yml"><img src="https://github.com/dshanpi/lynx/actions/workflows/build.yml/badge.svg" alt="Build"></a>
-    <a href="https://github.com/dshanpi/lynx-releases/releases"><img src="https://img.shields.io/github/v/release/dshanpi/lynx-releases" alt="Release"></a>
+    <a href="https://github.com/dshanpi/lynx-releases/releases"><img src="https://img.shields.io/badge/release-v0.1.0%20preparing-orange" alt="Release"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
   </p>
 </div>
 
 LYNX 把开发板管理、调试终端、固件烧录、远端 SDK 和 AI 编程工具放进同一个桌面应用。每块真实单板都有独立配置；每条 SDK 通道通过本机 MCP Gateway 和 SSH 反向隧道连接到远端 Linux 主机，让 Codex 或 Claude Code 能在明确的单板作用域内调用硬件能力。
 
-当前开发版本：**0.1.0**（内测版）
+当前状态：**v0.1.0 正式版准备中，尚未发布安装包。**
+
+历史 GitHub Releases、安装包及版本标签已清理，后续正式版本从 `v0.1.0` 开始发布。
 
 ## 核心能力
 
@@ -78,9 +80,9 @@ USB、串口和 ADB 能否访问还取决于操作系统驱动、设备权限及
 
 ## 安装
 
-前往 [LYNX Releases](https://github.com/dshanpi/lynx-releases/releases) 下载对应平台的安装包。
+目前暂无可下载的正式安装包。完成构建、签名和安装验收后，将在 [LYNX Releases](https://github.com/dshanpi/lynx-releases/releases) 发布 `v0.1.0`。
 
-发布页同时提供：
+正式发布时，发布页将提供：
 
 - Windows、Linux、macOS 安装包；
 - Tauri 自动更新签名；
