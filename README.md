@@ -1,140 +1,87 @@
-<div align="center">
-  <img width="112" src="https://raw.githubusercontent.com/dshanpi/lynx/main/assets/branding/lynx-icon-master.png" alt="DshanPI LYNX logo">
-  <h1>DshanPI LYNX｜芯桥</h1>
-  <p><strong>v0.1.0 正式版准备中 · 面向多芯片开发板的烧录、终端、远端 SDK 与 AI 调试工作台</strong></p>
-  <p><strong>面向嵌入式开发板的 AI 工作台、跨芯片烧录器与远端 SDK 通道管理工具</strong></p>
-  <p>
-    <a href="https://github.com/dshanpi/lynx/actions/workflows/build.yml"><img src="https://github.com/dshanpi/lynx/actions/workflows/build.yml/badge.svg" alt="Build"></a>
-    <a href="https://github.com/dshanpi/lynx-releases/releases"><img src="https://img.shields.io/badge/release-v0.1.0%20preparing-orange" alt="Release"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
-  </p>
-</div>
+# DshanPI LYNX｜芯桥
 
-LYNX 把开发板管理、调试终端、固件烧录、远端 SDK 和 AI 编程工具放进同一个桌面应用。每块真实单板都有独立配置；每条 SDK 通道通过本机 MCP Gateway 和 SSH 反向隧道连接到远端 Linux 主机，让 Codex 或 Claude Code 能在明确的单板作用域内调用硬件能力。
+**把开发板、开发环境、AI 工具和课程学习放进同一个桌面工作台。**
 
-当前状态：**v0.1.0 正式版准备中，尚未发布安装包。**
+[版本与下载](https://github.com/dshanpi/lynx-releases/releases) · [快速开始](docs/quick-start.md) · [使用手册](docs/user-guide.md) · [功能演示](docs/demos.md) · [发布状态](docs/release-status.md)
 
-历史 GitHub Releases、安装包及版本标签已清理，后续正式版本从 `v0.1.0` 开始发布。
+> **0.1.0 正式版准备中，尚无本轮已验收的正式安装包。** 文档和演示不表示安装、签名公证或全部实机验收已完成。下载以 Releases 实际公开的版本为准。
 
-## 核心能力
+LYNX 面向嵌入式学习者与开发者：在电脑上管理开发板、连接 Ubuntu 开发主机、跟随课程进入 VS Code 编程、检查构建与设备结果，再用 AI 理解问题和整理下一步。
 
-### 多芯片单板管理
+## 你可以用 LYNX 做什么
 
-- 新建单板时选择芯片厂家，并绑定独立的串口、USB 烧录接口和 ADB 接口。
-- 支持多块板同时保存，避免串口、USB 和 ADB 绑定跨板混用。
-- 单板状态集中显示，包括调试串口、烧录接口、ADB 和最近烧录结果。
-- 删除单板时自动停止并删除其 SDK 通道；共享 SSH 主机和凭证不会被误删。
+| 功能区 | 使用方式 | 前提 |
+| --- | --- | --- |
+| Linux 工作台 | 保存单板配置，绑定串口、USB、ADB，连接 SDK 与 SSH | 正确的板卡、接口和开发环境 |
+| MCU 工作台 | 管理 MCU、探针、固件与目标操作 | 支持的探针、芯片及连接配置 |
+| 学习中心 | 选择 AI 辅助整课，阅读、实践、记录与复盘 | 已开放的课程与对应权益，或合法本地课程包 |
+| AI 通道 | 配置服务、策略、任务，处理人工介入 | 可用模型服务、环境与授权 |
+| 记录中心 | 追溯操作、状态、问题和恢复过程 | 已产生的真实操作记录 |
 
-### 调试与烧录
+### 围绕单板开发
 
-- 内置串口终端和 ADB 终端，按单板保存运行状态。
-- 固件烧录进度、日志和任务历史统一展示。
-- 烧录参数通过数组直接传递给 CLI，不经过 Shell。
-- 每种芯片使用独立烧录适配器：
+每块板保存自己的接口和工程配置。板卡串口与 Ubuntu SSH 终端明确区分执行对象；ADB 文件传输位于设备相关功能中。USB、串口换口后可重新发现并保存绑定。
 
-| 芯片厂家          | 工具                | 当前能力                                                     |
-| ----------------- | ------------------- | ------------------------------------------------------------ |
-| Allwinner 全志    | OpenixCLI / libefex | FEL/FES 扫描与固件烧录                                       |
-| Rockchip 瑞芯微   | OpenRockCLI         | Maskrom/Loader 扫描、Rockusb 命令及跨平台 `update.img` 烧录  |
-| NXP i.MX          | UUU                 | SDP/Fastboot 设备扫描、UUU 脚本及固件执行，自动绑定 USB 路径 |
-| 嘉楠 K230/K230D   | LYNX 内置协议       | BootROM/Loader 扫描；EMMC、SD、SPI NAND、SPI NOR 与 OTP 烧录 |
-| ST STM32MP1/STM32 | dfu-util            | USB DFU/DfuSe 扫描；按 USB 路径和 alternate setting 定向烧录 |
+烧录显示进度、校验与终态。设备未连接、被占用或镜像不匹配时先处理原因；传输完成不等于校验通过，发出重启命令不等于系统启动成功。
 
-Allwinner 和 Rockchip 默认使用 `full_erase` 与烧录校验，降低旧文件系统状态影响启动的风险。
-AI/MCP 烧录仅接受 `full_erase`，避免调用方显式传入 `partition` 绕过安全默认值。
-NXP 严格执行单板保存的 UUU 脚本，不臆造通用擦除参数；K230 内置链路按镜像目标擦除后写入；
-STM32MP1/STM32 由 DfuSe target、alternate setting 和地址决定擦写范围。
+芯片适配覆盖全志、瑞芯微、NXP i.MX、嘉楠 K230 和 STM32 等方向；具体板型、系统、驱动及镜像组合以版本验收范围为准，不能据厂商名称推断全部型号均已验证。
 
-固件下载任务属于 LYNX 应用进程，不绑定创建它的 MCP session；Claude 重连或换 session 后仍可用同一
-`taskId` 轮询。若 LYNX 进程自身重启，重新调用下载会从保留的 `.part` 文件续传并重新执行 SHA-256 校验。
+### 连接 Ubuntu、SDK 与 VS Code
 
-进入 FEL/FES、Maskrom/Loader、SDP/Fastboot、BROM/U-Boot 或 USB DFU/DfuSe，只允许使用
-物理启动按键/拨码，或后续明确配置的可靠硬件复位/电源控制。LYNX MCP 会拒绝
-`syscon unbind`、`reboot-mode`、`devmem` 和软件 reboot-to-programming-mode 命令。
+保存开发主机、SSH 身份、工程目录、工具链和目标板，按课程提供的活动进入远程工程或文件。自动化通道核对主机身份，凭据由系统凭据库管理。
 
-### 远端 SDK 与 AI 通道
+打开编辑器、实际修改、构建通过、部署完成和板卡验证分别记录；任何一个状态都不能替代下一步。
 
-- 每块单板可创建多条 SDK 通道。
-- 相同的 SSH 地址、端口和用户名会复用同一主机及系统密钥环凭证。
-- 不同 SDK 自动分配独立的本机 Gateway 端口和远端 MCP 端口。
-- 多名研发连接同一台远端主机时，若保存的反向端口已被其他 LYNX 占用，SSH 服务端会原子分配空闲端口；实际端口自动保存并同步到启动命令。
-- MCP 名称由 SDK 通道名称自动生成，例如：
+### 嵌入式 AI 辅助学习
 
-```text
-T153-OminiGate SDK → lynx-t153-ominigate-sdk
-```
+学习中心专门组织支持 LYNX 的 **嵌入式 AI 辅助整课**。普通视频课、单节内容和零散实验不会自动转换为整课。
 
-- 自动启动本机 MCP Gateway、SSH 反向隧道并执行远端健康检查。
-- 支持 Codex 和 Claude Code；启动命令以内联配置仅挂载当前 SDK 通道，不读取或修改共享 SDK 目录及用户级 MCP 配置。
-- SSH 主机指纹固定，凭证保存在系统安全存储中，不写入 SQLite 配置数据库。
+课程工作区结合章节导航、教材与代码位置、环境准备、开发结果、AI 指引、复盘和评测。框架面向 KVM、BSP、音视频、Linux 应用及理论课程；具体课程是否上线由发布状态和权益决定，不表示这些课程均已开放。
 
-## 系统要求
+在线课程优先从账号同步，本地签名课程包是可选路径。学习记录、真实证据和 AI 解释保留各自来源，阅读完成不等同于实操通过。
 
-| 平台        | 支持状态 | 说明                                                                       |
-| ----------- | -------- | -------------------------------------------------------------------------- |
-| Windows x64 | 支持     | 提供 NSIS 和 MSI 安装包；烧录 CLI 及其运行库随应用打包                     |
-| Linux x64   | 支持     | 提供 AppImage、DEB 和 RPM；Rockchip `update.img` 整包烧录使用 Linux 工具链 |
-| macOS ARM64 | 支持     | 提供 DMG 和 `.app`；当前构建未进行 Apple 公证                              |
+### AI 指导与受控任务
 
-USB、串口和 ADB 能否访问还取决于操作系统驱动、设备权限及开发板当前启动模式。
+AI 可解释教材、分析已授权的代码和脱敏日志、提出检查建议。任务能否执行由设备范围、策略、环境、预算和必要确认决定，AI 不能自行修改权威成绩。
 
-## 安装
+## 第一次使用
 
-目前暂无可下载的正式安装包。完成构建、签名和安装验收后，将在 [LYNX Releases](https://github.com/dshanpi/lynx-releases/releases) 发布 `v0.1.0`。
+1. 在 [Releases](https://github.com/dshanpi/lynx-releases/releases) 确认存在适合系统与架构的正式版本。
+2. 按 [macOS 安装说明](docs/macos-install.md) 安装并启动。
+3. 需要学习时进入学习指南；需要开发时先保存板卡和 Ubuntu 配置。
+4. 需要 AI 时配置服务、保存并测试连接。
+5. 先完成一次明确的小任务，检查结果和记录，再扩展流程。
 
-正式发布时，发布页将提供：
+## 截图与操作演示
 
-- Windows、Linux、macOS 安装包；
-- Tauri 自动更新签名；
-- `latest.json` 更新清单；
-- `SHA256SUMS.txt` 文件校验和。
+含模拟课程或状态的画面均明确标注。演示不操作真实板卡，不生成正式成绩，不是硬件验收证据。完整索引见 [演示目录](docs/demos.md)。
 
-建议在安装前核对 SHA-256。Linux 的 DEB/RPM 安装包会安装嘉楠 K230 udev 规则，安装后重新插拔即可由普通用户烧录；AppImage 用户或其他 USB/串口设备仍应检查 udev 规则及用户组权限。Windows 用户应确认开发板 USB 驱动安装正确。
+### 课程工作区（模拟数据）
 
-## 快速开始
+![LYNX 课程工作区：目录、步骤、教材与学习指引](media/screenshots/course-workspace-demo.png)
 
-1. 打开 LYNX，进入“单板工作台”。
-2. 点击“新建”，选择芯片厂家并填写单板名称。
-3. 扫描并绑定该板的串口、USB 烧录接口和 ADB 接口。
-4. 保存单板。
-5. 添加 SDK 通道，填写远端主机地址、SSH 用户和 SDK 信息。
-6. 首次连接时测试并确认 SSH 主机指纹；如需密码登录，输入一次密码并保存到系统密钥环。
-7. 保存通道后，LYNX 会自动启动 Gateway 和隧道。
-8. 复制界面生成的 Codex 或 Claude Code 启动命令，在目标 SDK 目录启动 AI 工具。
+### AI 配置操作
 
-同一台远端主机可以服务多块开发板和多个 SDK。LYNX 会自动处理端口及 MCP 名称冲突，不需要重复保存 SSH 凭证。
+![填写示例连接、展开运行限制、查看策略](media/gif/ai-configuration.gif)
 
-## 架构
+### 章节切换与复盘草稿（模拟数据）
 
-```text
-┌───────────────────────────────────────────────────────────────┐
-│                    LYNX Desktop (Tauri)                       │
-│                                                               │
-│  React 工作台 ── Tauri IPC ── Rust 任务、设备与安全边界       │
-│       │                         │                              │
-│       │                         ├─ Serial / ADB                │
-│       │                         ├─ OpenixCLI / OpenRockCLI     │
-│       │                         ├─ NXP UUU                     │
-│       │                         ├─ K230 native USB protocol    │
-│       │                         └─ STM32 dfu-util              │
-│       │                         └─ SQLite + 系统密钥环          │
-│       │                                                        │
-│       └─ MCP Gateway (127.0.0.1:8765+)                         │
-│                         │                                      │
-└─────────────────────────┼──────────────────────────────────────┘
-                          │ SSH reverse tunnel
-                          ▼
-                远端 Linux SDK 主机
-                127.0.0.1:动态端口/mcp
-                          │
-                          ▼
-                 Codex / Claude Code
-```
+![进入课程、折叠指引、输入复盘、切章返回](media/gif/learning-demo.gif)
 
-### 安全边界
+以上为原生窗口逐步操作截图合成的动图，不是连续录屏。学习示例未连接正式评测服务，画面保留服务不可用提示，不代表线上评测或实验已经通过。[查看全部截图与 MP4](docs/demos.md)。
 
-- 烧录 CLI 参数不经过 Shell。
-- SSH 连接使用固定主机指纹，主机密钥变化会中止连接。
-- 密码和私钥口令存放于 Windows Credential Manager、macOS Keychain 或 Linux Secret Service。
-- SQLite 只保存非敏感配置和任务历史。
-- 每条 MCP Gateway 都携带单板、项目和端口作用域，防止多板路由串线。
+## 使用文档
+
+- [快速开始](docs/quick-start.md)
+- [macOS 安装、迁移与卸载](docs/macos-install.md)
+- [完整使用手册：工作台、课程、AI 和记录](docs/user-guide.md)
+- [常见问题](docs/faq.md)
+- [功能演示与数据说明](docs/demos.md)
+- [发布状态和已知限制](docs/release-status.md)
+- [0.1.0 版本说明](docs/v0.1.0.md)
+
+## 软件与源码
+
+本仓库只分发安装包和用户资料，**不提供 LYNX 产品源代码**。第三方组件遵循各自随附许可；本仓库公开不代表产品源码开放或获得再分发授权。
+
+公开反馈不得包含 API Key、SSH 密码、私钥、订单号、账号令牌、私人项目正文或未脱敏日志。
