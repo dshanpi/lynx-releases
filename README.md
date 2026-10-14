@@ -58,7 +58,17 @@ AI 可解释教材、分析已授权的代码和脱敏日志、提出检查建�
 
 ### 课程工作区（模拟数据）
 
-![LYNX 课程工作区：目录、步骤、教材与学习指引](media/screenshots/course-workspace-demo.png)
+![LYNX 课程工作区：目录、步骤、教材与学习指引](media/screenshots/practice-01.png)
+
+### Linux 工作台
+
+![Linux 单板、Ubuntu、串口、SSH、固件和 AI 通道](media/gif/linux-workbench.gif)
+
+### 单片机（MCU）工作台
+
+![MCU 芯片、探针、串口、固件和 AI 通道](media/gif/mcu-workbench.gif)
+
+以上为模拟配置和未连接设备状态；实际下载、复位、供电等没有执行。
 
 ### AI 配置操作
 
