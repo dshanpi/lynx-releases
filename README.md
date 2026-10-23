@@ -4,7 +4,7 @@
 
 [版本与下载](https://github.com/dshanpi/lynx-releases/releases) · [快速开始](docs/quick-start.md) · [使用手册](docs/user-guide.md) · [功能演示](docs/demos.md) · [发布状态](docs/release-status.md)
 
-> **Windows V0.1.1 已提供 GitHub 更新修复文件。** V0.1.0 检查不到更新时，请先阅读 [Windows 自动更新修复](docs/windows-update.md)，使用文件名含 `github-update` 的修复包。原生 Windows 安装与重启仍由隔离测试机验收；下载公开不等于所有平台和硬件验收通过。
+> **当前 Windows 版本：V0.1.0。** [下载安装包](https://github.com/dshanpi/lynx-releases/releases/tag/v0.1.0) · [Windows 安装与更新](docs/windows-update.md) · [发布状态](docs/release-status.md)
 
 LYNX 面向嵌入式学习者与开发者：在电脑上管理开发板、连接 Ubuntu 开发主机、跟随课程进入 VS Code 编程、检查构建与设备结果，再用 AI 理解问题和整理下一步。
 
@@ -47,7 +47,7 @@ AI 可解释教材、分析已授权的代码和脱敏日志、提出检查建�
 ## 第一次使用
 
 1. 在 [Releases](https://github.com/dshanpi/lynx-releases/releases) 确认存在适合系统与架构的正式版本。
-2. Windows 用户参阅 [更新与修复安装说明](docs/windows-update.md)；macOS 用户先确认对应包可用，再参阅 [安装说明](docs/macos-install.md)。
+2. Windows 用户参阅 [安装与更新说明](docs/windows-update.md)；macOS 用户先确认对应包可用，再参阅 [安装说明](docs/macos-install.md)。
 3. 需要学习时进入学习指南；需要开发时先保存板卡和 Ubuntu 配置。
 4. 需要 AI 时配置服务、保存并测试连接。
 5. 先完成一次明确的小任务，检查结果和记录，再扩展流程。
