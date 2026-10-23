@@ -47,7 +47,7 @@ AI 可解释教材、分析已授权的代码和脱敏日志、提出检查建�
 ## 第一次使用
 
 1. 在 [Releases](https://github.com/dshanpi/lynx-releases/releases) 确认存在适合系统与架构的正式版本。
-2. 按 [macOS 安装说明](docs/macos-install.md) 安装并启动。
+2. Windows 用户参阅 [更新与修复安装说明](docs/windows-update.md)；macOS 用户先确认对应包可用，再参阅 [安装说明](docs/macos-install.md)。
 3. 需要学习时进入学习指南；需要开发时先保存板卡和 Ubuntu 配置。
 4. 需要 AI 时配置服务、保存并测试连接。
 5. 先完成一次明确的小任务，检查结果和记录，再扩展流程。
