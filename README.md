@@ -4,7 +4,7 @@
 
 [版本与下载](https://github.com/dshanpi/lynx-releases/releases) · [快速开始](docs/quick-start.md) · [使用手册](docs/user-guide.md) · [功能演示](docs/demos.md) · [发布状态](docs/release-status.md)
 
-> **0.1.0 正式版准备中，尚无本轮已验收的正式安装包。** 文档和演示不表示安装、签名公证或全部实机验收已完成。下载以 Releases 实际公开的版本为准。
+> **Windows V0.1.1 已提供 GitHub 更新修复文件。** V0.1.0 检查不到更新时，请先阅读 [Windows 自动更新修复](docs/windows-update.md)，使用文件名含 `github-update` 的修复包。原生 Windows 安装与重启仍由隔离测试机验收；下载公开不等于所有平台和硬件验收通过。
 
 LYNX 面向嵌入式学习者与开发者：在电脑上管理开发板、连接 Ubuntu 开发主机、跟随课程进入 VS Code 编程、检查构建与设备结果，再用 AI 理解问题和整理下一步。
 
