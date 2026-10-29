@@ -4,7 +4,7 @@
 
 [版本与下载](https://github.com/dshanpi/lynx-releases/releases) · [快速开始](docs/quick-start.md) · [使用手册](docs/user-guide.md) · [功能演示](docs/demos.md) · [发布状态](docs/release-status.md)
 
-> **当前 Windows 版本：V0.1.0。** [下载安装包](https://github.com/dshanpi/lynx-releases/releases/tag/v0.1.0) · [Windows 安装与更新](docs/windows-update.md) · [发布状态](docs/release-status.md)
+> **当前 Windows 正式版：V0.1.1。** [下载安装包](https://github.com/dshanpi/lynx-releases/releases/tag/v0.1.1) · [Windows 安装与更新](docs/windows-update.md) · [发布状态](docs/release-status.md)
 
 LYNX 面向嵌入式学习者与开发者：在电脑上管理开发板、连接 Ubuntu 开发主机、跟随课程进入 VS Code 编程、检查构建与设备结果，再用 AI 理解问题和整理下一步。
 
